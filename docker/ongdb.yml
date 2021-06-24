@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+    ongdb:
+        ports:
+            - '7474:7474'
+            - '7687:7687'
+        volumes:
+            - ../store/ongdb-enterprise/data:/data'
+        image: 'graphfoundation/ongdb-enterprise:1.0.0-beta01'

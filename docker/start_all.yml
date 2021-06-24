@@ -1,0 +1,25 @@
+version: "3"
+services:
+  app:
+    container_name: xgrapher
+    image: xgrapher:v1
+    environment:
+      - CONFIG_SOURCE=env
+      - STORE_TYPE=ONGDB
+      - STORE_URL=http://ongdb:ongdb123@ongdb:7474
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+      args:
+        environment: dev
+        status: stable
+    ports:
+        - 8082:8000
+  ongdb:
+    container_name: ongdb
+    ports:
+      - '7474:7474'
+      - '7687:7687'
+    volumes:
+      - ../store/ongdb-enterprise/data:/data'
+    image: 'graphfoundation/ongdb-enterprise:1.0.0-beta01'
